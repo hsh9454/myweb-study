@@ -13,13 +13,32 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@GetMapping("/showData") 
+
 		public String showData(Model model) {
 		String result = memberService.getDbName();
 		model.addAttribute("name",result);
 		return "showResult";
+	}
+	
+	@GetMapping("/insert")
+	public String insertMember(String name, Model model) {
+		model.addAttribute("msg", name + " 등록 시도!");
+		return "showResult";
+	}
+	
+	@GetMapping("/Update")//dd
+	public String updateMember(String name, Model model) {
+		model.addAttribute("msg", name + " 수정 시도!");
+		return "showResult";
+	
+	}
+	
+	@GetMapping("/delete")
+	public String deleteMember(String name, Model model) {
+		model.addAttribute("msg", name + " 삭제 시도!");
+		return "showResult";
 		
 	}
-	  
-
+	
 
 }
