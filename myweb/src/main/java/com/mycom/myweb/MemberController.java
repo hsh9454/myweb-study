@@ -26,14 +26,14 @@ public class MemberController {
 		return "showResult";
 	}
 	
-	@GetMapping("/Update") //업데이트
+	@GetMapping("/Update") 
 	public String updateMember(String name, Model model) {
 		model.addAttribute("msg", name + " 수정 시도!");
 		return "showResult";
 	
 	}
 	
-	@GetMapping("/delete")
+	@GetMapping("/delete") //딜리트
 	public String deleteMember(String name, Model model) {
 		model.addAttribute("msg", name + " 삭제 시도!");
 		return "showResult";
