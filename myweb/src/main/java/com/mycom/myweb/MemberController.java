@@ -26,7 +26,7 @@ public class MemberController {
 		return "showResult";
 	}
 	
-	@GetMapping("/Update") // 회원수정
+	@GetMapping("/Update") 
 	public String updateMember(String name, Model model) {
 		model.addAttribute("msg", name + " 수정 시도!");
 		return "showResult";
