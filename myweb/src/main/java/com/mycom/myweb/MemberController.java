@@ -20,7 +20,7 @@ public class MemberController {
 		return "showResult";
 	}
 	
-	@GetMapping("/insert")
+	@GetMapping("/insert") //인설트
 	public String insertMember(String name, Model model) {
 		model.addAttribute("msg", name + " 등록 시도!");
 		return "showResult";
