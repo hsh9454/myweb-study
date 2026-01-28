@@ -11,13 +11,14 @@ public interface MemberMapper {
 	String getName();
 
 
-    @Insert("INSERT INTO test (id, name) VALUES (#{id}, #{name}")
-    public void insertTest(@Param("id") int id, @Param("name") String name);
-    
-    @Update("UPDATE test SET name = #{name} WHERE id = #{id})")
-    public void updateTest(@Param("id") int id, @Param("name") String name);
-    
-    @Delete("DELETE FROM test WHERE id = #{id}")
-    public void deleteTest(@Param("id") int id);
-    
+	
+	@Insert("INSERT INTO test (id, name) VALUES (#{id}, #{name})") 
+	public void insertTest(@Param("id") int id, @Param("name") String name);
+
+	
+	@Update("UPDATE test SET name = #{name} WHERE id = #{id}") 
+	public void updateTest(@Param("id") int id, @Param("name") String name);
+
+	@Delete("DELETE FROM test WHERE id = #{id}")
+	public void deleteTest(@Param("id") int id);
 }

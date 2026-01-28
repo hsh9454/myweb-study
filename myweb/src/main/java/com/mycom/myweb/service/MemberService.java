@@ -1,17 +1,11 @@
 package com.mycom.myweb.service;
 
 public interface MemberService {
-	public String getDbName();
-	
-	void register(int id, String name);
-	void modify(int id, String name);
-	void remove(int id);
-	
-	
-	
-	
-	
-	
-	
+   
+    String getDbName();
+    
 
+    void insertTest(int id, String name);
+    void updateTest(int id, String name);
+    void deleteTest(int id);
 }

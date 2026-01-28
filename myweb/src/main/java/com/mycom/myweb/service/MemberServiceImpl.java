@@ -17,19 +17,20 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 	
+	// MemberServiceImpl.java 파일 안에 추가할 내용
 	@Override
-	public void register(int id, String name) {
-		memberMapper.insertTest(id, name);
+	public void insertTest(int id, String name) {
+	    memberMapper.insertTest(id, name);
 	}
-	
+
 	@Override
-	public void modify(int id, String name) {
-		memberMapper.updateTest(id, name);
+	public void updateTest(int id, String name) {
+	    memberMapper.updateTest(id, name);
 	}
-	
+
 	@Override
-	public void remove(int id) {
-		memberMapper.deleteTest(id);
+	public void deleteTest(int id) {
+	    memberMapper.deleteTest(id);
 	}
 	
 }
