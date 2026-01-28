@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body> //0106ㅇㅇㅇㅇㅇ
+<body> 
  <h1> 01-06 공부 일지 스프링 6 세팅 완료 !! </h1>
 </body>
 </html> 
