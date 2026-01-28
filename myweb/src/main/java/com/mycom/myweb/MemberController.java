@@ -33,7 +33,7 @@ public class MemberController {
 	
 	}
 	
-	@GetMapping("/delete") //dd
+	@GetMapping("/delete")
 	public String deleteMember(String name, Model model) {
 		model.addAttribute("msg", name + " 삭제 시도!");
 		return "showResult";
