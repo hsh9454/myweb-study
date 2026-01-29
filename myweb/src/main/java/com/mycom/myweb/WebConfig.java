@@ -10,5 +10,5 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ComponentScan(basePackages = "com.mycom.myweb")
 @ImportResource("/WEB-INF/spring/root-context.xml")
 public class WebConfig {
-    // 설정용 파일이라 내용은 비어있어도 괜찮습니다!
+   
 }

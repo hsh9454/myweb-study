@@ -26,4 +26,6 @@
 
 	<context:component-scan base-package="com.mycom.myweb.service" />
 		
+	<mybatis-spring:scan base-package="com.mycom.myweb" />	
+		
 </beans>

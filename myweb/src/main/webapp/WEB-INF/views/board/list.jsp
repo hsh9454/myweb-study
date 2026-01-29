@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -15,6 +15,26 @@
 
 <h2>📋 게시판 목록 (130개 중 10개씩 보기)</h2>
 
+<div style="text-align: right; margin-bottom: 10px;">
+    <% if(session.getAttribute("user") == null) { %>
+        <a href="${pageContext.request.contextPath}/board/login">로그인</a>
+    <% } else { %>
+        <strong>${user.username}님 환영합니다!</strong>
+        <a href="${pageContext.request.contextPath}/board/logout">로그아웃</a>
+    <% } %>
+    
+    <c:if test="${not empty sessionScope.user}">
+    <button type="button" onclick="location.href='/board/register'">새 글 등록</button>
+</c:if>
+    
+    
+    
+    
+</div>
+
+
+
+
 <table>
     <thead>
         <tr>
@@ -27,36 +47,37 @@
     
     <tbody>
         <tr style="background-color: #fff9e6;">
-            <td>📢</td>
-            <td><strong><a href="/myweb/board/get?bno=1">[공지] 우리 게시판 1호 글입니다!</a></strong></td>
-            <td>관리자</td>
-            <td>2026-01-28</td>
+        <td>🥶</td>
+        <td><strong><a href="/myweb/board/get?bno=1">[공지] 감기 조심하세요 !! </a></strong></td>
+        <td>관리자</td>
+        <td>2026-01-28</td>
+    </tr>
+    
+    <c:forEach items="${list}" var="board">
+        <tr>
+            <td>${board.bno}</td>
+            <td>
+                <a href="/myweb/board/get?bno=${board.bno}">${board.title}</a>
+            </td>
+            <td>${board.writer}</td>
+            <td>${board.regdate}</td>
         </tr>
-        
-        <c:forEach items="${list}" var="board">
-            <c:if test="${board.bno != 1}">
-                <tr>
-                    <td>${board.bno}</td>
-                    <td>
-                        <a href="/myweb/board/get?bno=${board.bno}">${board.title}</a>
-                    </td>
-                    <td>${board.writer}</td>
-                    <td>${board.regdate}</td>
-                </tr>
-            </c:if>
-        </c:forEach>
+    </c:forEach>
     </tbody>
 </table>
 
 
 <div class="pagination">
-    <c:forEach var="num" begin="1" end="13">
+    <c:forEach var="num" begin="1" end="${totalPages}">
         <a href="/myweb/board/list?pageNum=${num}" 
            style="${num == pageMaker.pageNum ? 'background-color: #ddd; font-weight: bold;' : ''}">
            ${num}
         </a>
     </c:forEach>
 </div>
-<button onclick="location.href='/myweb/board/register'" style="float: right; margin-bottom: 10px;">글쓰기</button>
+<c:if test="${not empty sessionScope.user}">
+    <button type="button" onclick="location.href='/board/register'" style="float:right;">글쓰기</button>
+</c:if>
+
 </body>
 </html>

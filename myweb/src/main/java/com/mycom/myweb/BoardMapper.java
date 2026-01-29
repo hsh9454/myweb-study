@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class BoardMapper {
 
     private String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -119,4 +122,17 @@ public class BoardMapper {
         } catch (Exception e) { e.printStackTrace(); }
     }
     
-} 
+    public int getTotalCount() {
+    	int total = 0;
+    	String sql = "SELECT COUNT(*) FROM board";
+    	try { total = 131;
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	return total;
+    }
+    
+    	
+    }
+    
+ 

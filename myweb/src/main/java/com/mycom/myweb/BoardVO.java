@@ -10,7 +10,7 @@ public class BoardVO {
     private Timestamp regdate;    
     private Timestamp updatedate; 
 
-   
+  
     public int getBno() { return bno; }
     public void setBno(int bno) { this.bno = bno; }
 

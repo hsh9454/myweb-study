@@ -17,7 +17,7 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 	
-	// MemberServiceImpl.java 파일 안에 추가할 내용
+	
 	@Override
 	public void insertTest(int id, String name) {
 	    memberMapper.insertTest(id, name);

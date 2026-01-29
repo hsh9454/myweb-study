@@ -1,16 +1,27 @@
 package com.mycom.myweb;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.ui.Model;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
+import com.mycom.myweb.UserMapper;
+import com.mycom.myweb.UserVO;
 
 @Controller
 public class BoardController {
 
    
-    private BoardMapper mapper = new BoardMapper();
+	@Autowired  
+	private BoardMapper mapper;
+	
+	@Autowired
+    private UserMapper userMapper;
 
     
     @GetMapping("/board/list")
@@ -19,10 +30,15 @@ public class BoardController {
         System.out.println("--- 게시판 목록 페이지 접속 ---");
         System.out.println("요청 페이지: " + cri.getPageNum());
         
+        int total = mapper.getTotalCount();
+        int totalPages = (int) Math.ceil((double) total / cri.getAmount());
+        		
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("currentPage", cri.getPageNum());
+        
+        
         
         model.addAttribute("list", mapper.getListWithPaging(cri));
-        
-       
         model.addAttribute("pageMaker", cri); 
     }
     
@@ -75,10 +91,42 @@ public class BoardController {
         
         mapper.insert(vo); 
         
-        return "redirect:/board/list"; // 
+        return "redirect:/board/list"; 
     }
     
-    
+ 
+    @GetMapping("/board/login")
+    public void login() {
+        System.out.println("--- 로그인 페이지 접속 ---");
+    }
+
+  
+    @PostMapping("/board/login")
+    public String login(UserVO vo, HttpServletRequest request) {
+        System.out.println("로그인 시도 아이디: " + vo.getUserid());
+
+   
+        UserVO loginUser = userMapper.login(vo);
+
+        if (loginUser != null) {
+           
+            HttpSession session = request.getSession();
+            session.setAttribute("user", loginUser); 
+            System.out.println("로그인 성공! : " + loginUser.getUsername());
+            return "redirect:/board/list"; 
+        } else {
+        
+            System.out.println("로그인 실패...");
+            return "redirect:/board/login";
+        }
+    }
+
+  
+    @GetMapping("/board/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); 
+        return "redirect:/board/list";
+    }
     
     
     
