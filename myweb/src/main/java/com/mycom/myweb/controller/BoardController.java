@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mycom.myweb.BoardVO;
 import com.mycom.myweb.Criteria;
@@ -70,8 +71,12 @@ public class BoardController {
     }
 
     @GetMapping("/register")
-    public String register() {
-        return "board/register";
+    public String register(HttpSession session, RedirectAttributes ra) {
+    	if (session.getAttribute("user") == null) {
+    		ra.addFlashAttribute("msg", "로그인 후 이용 가능한 서비스입니다.");
+    		return "redirect:/board/login";
+    	}
+    	return "board/register";
     }
 
     @PostMapping("/register")

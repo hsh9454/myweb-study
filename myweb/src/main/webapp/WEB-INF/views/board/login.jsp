@@ -8,7 +8,7 @@
 <body>
     <h2>로그인 하세요</h2>
     <hr>
-    
+=
     <form action="login" method="post">
         <div>
             아이디: <input type="text" name="userid" required>
@@ -20,6 +20,15 @@
         <button type="submit">로그인</button>
        <a href="list">취소</a>
     </form>
+    
+    <script>
+    window.onload = function() {
+    	let message = "${msg}";
+    	if(message) {
+    		alert(message);
+    	}
+    };
+    </script>
     
 </body>
 </html>
