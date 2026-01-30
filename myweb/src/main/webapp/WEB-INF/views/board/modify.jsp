@@ -6,7 +6,10 @@
     <h2>🛠️ 게시글 수정/삭제</h2>
     <form action="/myweb/board/modify" method="post">
         <table border="1">
-            <tr><th>번호</th><td><input name="bno" value="${board.bno}" readonly></td></tr>
+            <tr>
+                <th>번호</th>
+                <td><input value="${vNum}" readonly></td>
+            </tr>
             <tr><th>작성자</th><td>${board.writer}</td></tr>
             <tr><th>제목</th><td><input name="title" value="${board.title}"></td></tr>
             <tr><th>내용</th><td><textarea name="content" rows="10">${board.content}</textarea></td></tr>

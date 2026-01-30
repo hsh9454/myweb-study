@@ -51,7 +51,7 @@
 
     <div class="btn-group">
         <button onclick="location.href='/myweb/board/list'">목록으로</button>
-        <button onclick="location.href='/myweb/board/modify?bno=${board.bno}'">수정/삭제하기</button>
+        <button onclick="location.href='/myweb/board/modify?bno=${board.bno}&num=${vNum}'">수정/삭제하기</button>
     </div>
 </div>
 
