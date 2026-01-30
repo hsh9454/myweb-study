@@ -86,9 +86,6 @@
         </a>
     </c:forEach>
 </div>
-<c:if test="${not empty sessionScope.user}">
-    <button type="button" onclick="location.href='/board/register'" style="float:right;">글쓰기</button>
-</c:if>
 
 </body>
 </html>
