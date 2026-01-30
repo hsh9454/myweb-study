@@ -22,119 +22,79 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/board")
 public class BoardController {
 
-	@Autowired
-	@Qualifier("boardServiceImpl")
-	private BoardService service;
-	
-	@Autowired
+    @Autowired
+    @Qualifier("boardServiceImpl")
+    private BoardService service;
+    
+    @Autowired
     private UserMapper userMapper;
 
     @GetMapping("/list")
     public void list(Criteria cri, Model model) {
-        
-        System.out.println("--- 게시판 목록 페이지 접속 ---");
-        System.out.println("요청 페이지: " + cri.getPageNum());
-        
         int total = service.getTotalCount();
         int totalPages = (int) Math.ceil((double) total / cri.getAmount());
-        		
+        
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("currentPage", cri.getPageNum());
-        
-        
-        
         model.addAttribute("list", service.getListWithPaging(cri));
         model.addAttribute("pageMaker", cri); 
+        model.addAttribute("total", total);
     }
     
-
     @GetMapping("/get")
-    public void get(@RequestParam("bno") int bno, Model model) {
-        
-        System.out.println(bno + "번 글 상세보기 요청 들어옴!");
-        
-        
-        BoardVO vo = service.get(bno);
-        model.addAttribute("board", vo);
-        
-      
+    public void get(@RequestParam("bno") int bno, 
+                    @RequestParam(value="num", required=false, defaultValue="0") int num, 
+                    Model model) {           
+        model.addAttribute("board", service.get(bno));
+        model.addAttribute("vNum", num);
     }
-    
-    
- 
+
     @GetMapping("/modify")
     public void modify(@RequestParam("bno") int bno, Model model) {
         model.addAttribute("board", service.get(bno));
     }
 
-  
     @PostMapping("/modify")
     public String modify(BoardVO vo) {
-    	service.update(vo);
+        service.update(vo);
         return "redirect:/board/list"; 
     }
 
- 
     @PostMapping("/remove")
     public String remove(@RequestParam("bno") int bno) {
-    	service.delete(bno);
+        service.delete(bno);
         return "redirect:/board/list"; 
     }
-    
 
     @GetMapping("/register")
     public String register() {
         return "board/register";
     }
 
-    
     @PostMapping("/register")
     public String register(BoardVO vo) {
-        System.out.println("새 글 등록 요청: " + vo.getTitle());
-        
-        service.insert(vo); 
-        
+        service.insert(vo);
         return "redirect:/board/list"; 
     }
-    
- 
-    @GetMapping("/login")
-    public void login() {
-        System.out.println("--- 로그인 페이지 접속 ---");
-    }
 
-  
+    @GetMapping("/login")
+    public void login() { }
+
     @PostMapping("/login")
     public String login(UserVO vo, HttpServletRequest request) {
-        System.out.println("로그인 시도 아이디: " + vo.getUserid());
-
-   
         UserVO loginUser = userMapper.login(vo);
-
         if (loginUser != null) {
-           
             HttpSession session = request.getSession();
             session.setAttribute("user", loginUser); 
-            System.out.println("로그인 성공! : " + loginUser.getUsername());
             return "redirect:/board/list"; 
         } else {
-        
-            System.out.println("로그인 실패...");
             return "redirect:/board/login";
         }
     }
 
-  
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate(); 
         return "redirect:/board/list";
     }
-    
-    
-    
-    
-    
-    
-    
 }

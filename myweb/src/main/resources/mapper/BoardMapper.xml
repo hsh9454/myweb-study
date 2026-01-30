@@ -9,24 +9,26 @@
   </select>
 
   <select id="getListWithPaging" resultType="com.mycom.myweb.BoardVO">
-  <![CDATA[
-    SELECT * FROM (
-        SELECT rownum rn, bno, title, content, writer, regdate, updatedate
-        FROM board
-        WHERE rownum <= #{pageNum} * #{amount}
-    )
-    WHERE rn > (#{pageNum} - 1) * #{amount}
-  ]]>
-  </select>
-
+<![CDATA[
+  SELECT bno, title, content, writer, regdate, updatedate
+  FROM (
+      SELECT rownum rn, bno, title, content, writer, regdate, updatedate
+      FROM (SELECT * FROM board ORDER BY bno DESC)
+      WHERE rownum <= #{pageNum} * #{amount}
+  )
+  WHERE rn > (#{pageNum} - 1) * #{amount}
+]]>
+</select>
+  
+  
   <select id="get" resultType="com.mycom.myweb.BoardVO">
    SELECT * FROM board WHERE bno = #{bno}
   </select>
 
-  <insert id="insert">
+  <insert id="insert" parameterType="com.mycom.myweb.BoardVO">
     INSERT INTO board (bno, title, content, writer)
     VALUES (board_seq.nextval, #{title}, #{content}, #{writer})
-  </insert>
+</insert>
 
   <update id="update">
      UPDATE board SET title = #{title}, content = #{content}, updatedate = sysdate

@@ -25,7 +25,7 @@
     <table>
         <tr>
             <th>글 번호</th>
-            <td>${board.bno}</td>
+            <td>${vNum}</td>
         </tr>
         <tr>
             <th>작성자</th>

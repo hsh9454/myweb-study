@@ -53,23 +53,28 @@
     
     <tbody>
         <tr style="background-color: #fff9e6;">
-        <td>🥶</td>
-        <td><strong><a href="/myweb/board/get?bno=1">[공지] 감기 조심하세요 !! </a></strong></td>
-        <td>관리자</td>
-        <td>2026-01-28</td>
-    </tr>
+            <td>🥶</td>
+            <td><strong><a href="/myweb/board/get?bno=1">[공지] 감기 조심하세요 !! </a></strong></td>
+            <td>관리자</td>
+            <td>2026-01-28</td>
+        </tr>
     
-    <c:forEach items="${list}" var="board">
+    <c:forEach items="${list}" var="board" varStatus="status">
+        <c:set var="currentNum" value="${total - ((pageMaker.pageNum - 1) * 10) - status.index}" />
         <tr>
-            <td>${board.bno}</td>
+            <td>${currentNum}</td>
+        
             <td>
-                <a href="/myweb/board/get?bno=${board.bno}">${board.title}</a>
+            <a href="/myweb/board/get?bno=${board.bno}&num=${currentNum}">
+                ${board.title}
+            </a>
             </td>
             <td>${board.writer}</td>
-            <td>${board.regdate}</td>
+            <td><fmt:formatDate value="${board.regdate}" pattern="yyyy-MM-dd"/></td>
         </tr>
-    </c:forEach>
-    </tbody>
+      </c:forEach>
+  
+     </tbody>
 </table>
 
 
