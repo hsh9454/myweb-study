@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
   
-  <mapper namespace="com.mycom.myweb.mapper.BoardMapper">
+<mapper namespace="com.mycom.myweb.mapper.BoardMapper">
   
   <select id="getTotalCount" resultType="int">
     SELECT COUNT(*) FROM board
@@ -10,15 +10,13 @@
 
   <select id="getListWithPaging" resultType="com.mycom.myweb.BoardVO">
   <![CDATA[
-    SELECT bno, title, content, writer, regdate, updatedate
-    FROM (
-        SELECT /*+INDEX_DESC(board pk_board) */
-          rownum rn, bno, title, content, writer, regdate, updatedate
+    SELECT * FROM (
+        SELECT rownum rn, bno, title, content, writer, regdate, updatedate
         FROM board
         WHERE rownum <= #{pageNum} * #{amount}
     )
     WHERE rn > (#{pageNum} - 1) * #{amount}
-]]>
+  ]]>
   </select>
 
   <select id="get" resultType="com.mycom.myweb.BoardVO">
@@ -44,17 +42,3 @@
   </select>
 
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

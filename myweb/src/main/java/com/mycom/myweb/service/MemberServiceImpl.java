@@ -13,11 +13,9 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public String getDbName() {
-		return memberMapper.getName();
-		
+		return memberMapper.getName();	
 	}
 
-	
 	@Override
 	public void insertTest(int id, String name) {
 	    memberMapper.insertTest(id, name);

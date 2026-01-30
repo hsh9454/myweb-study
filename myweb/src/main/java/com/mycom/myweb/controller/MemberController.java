@@ -4,17 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycom.myweb.service.MemberService;
 
 @Controller
+@RequestMapping("/")
 public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
 	
-	@GetMapping("/showData") 
+	@GetMapping("showData") 
 
 		public String showData(Model model) {
 		String result = memberService.getDbName();
@@ -22,7 +24,7 @@ public class MemberController {
 		return "showResult";
 	}
 	
-	@GetMapping("/insert") 
+	@GetMapping("insert") 
 	public String insertMember(@RequestParam("id") int id, @RequestParam("name") String name, Model model) {
 	  
 	    memberService.insertTest(id, name); 
@@ -31,7 +33,7 @@ public class MemberController {
 	    return "showResult";
 	}
 
-	@GetMapping("/update") 
+	@GetMapping("update") 
 	public String updateMember(@RequestParam("id") int id, @RequestParam("name") String name, Model model) {
 	   
 	    memberService.updateTest(id, name);
@@ -40,7 +42,7 @@ public class MemberController {
 	    return "showResult";
 	}
 
-	@GetMapping("/delete") 
+	@GetMapping("delete") 
 	public String deleteMember(@RequestParam("id") int id, Model model) {
 	   
 	    memberService.deleteTest(id);

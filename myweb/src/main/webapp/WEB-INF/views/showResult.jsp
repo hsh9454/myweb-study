@@ -7,11 +7,12 @@
 <title> 01-28 공부 일지 </title>
 </head>
 <body>
-      <h1>pring Controller에 C, U, D 주소(엔드포인트) 만들기</h1>
+      <h2>결과 화면</h2>
+      <p>가져온 이름: ${name}</p>
+    
+      <p style="color:blue;">메시지: ${msg}</p>
+    
       <hr>
-      <h1>Git을 사용해 각 단계를 명확한 메시지로 커밋하고 푸시하기</h1>
-      <hr>
-     
-      <h2>결과 메시지: ${msg}</h2>
+      <a href="/showData">데이터 다시 조회하기</a>
 </body>
 </html>
