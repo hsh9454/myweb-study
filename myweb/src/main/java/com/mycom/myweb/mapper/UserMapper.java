@@ -1,8 +1,12 @@
-package com.mycom.myweb;
+package com.mycom.myweb.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import com.mycom.myweb.UserVO;
 
+
+@Mapper
 public interface UserMapper {
 
     

@@ -3,7 +3,7 @@ package com.mycom.myweb.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mycom.myweb.Mapper.MemberMapper;
+import com.mycom.myweb.mapper.MemberMapper;
 
 @Service
 public class MemberServiceImpl implements MemberService {

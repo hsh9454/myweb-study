@@ -1,15 +1,16 @@
-package com.mycom.myweb.Mapper;
+package com.mycom.myweb.mapper;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+@Mapper
 public interface MemberMapper {
    
 	@Select("SELECT USERNAME FROM MEMBER_TEST WHERE ROWNUM = 1")
 	String getName();
-
 
 	
 	@Insert("INSERT INTO test (id, name) VALUES (#{id}, #{name})") 
