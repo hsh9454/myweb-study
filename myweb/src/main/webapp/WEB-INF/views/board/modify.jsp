@@ -5,6 +5,7 @@
 <body>
     <h2>🛠️ 게시글 수정/삭제</h2>
     <form action="/myweb/board/modify" method="post">
+        <input type="hidden" name="bno" value="${board.bno}">
         <table border="1">
             <tr>
                 <th>번호</th>
@@ -16,7 +17,12 @@
         </table>
         <br>
         <button type="submit">수정완료</button>
-        <button type="submit" onclick="this.form.action='/myweb/board/remove'">삭제하기</button>
+        <button type="button" 
+        onclick="if(confirm('정말 삭제하시겠습니까?')){ 
+                    let f = document.querySelector('form'); 
+                    f.action='/myweb/board/remove'; 
+                    f.submit(); 
+                 }">삭제하기</button>
         <button type="button" onclick="location.href='/myweb/board/list'">취소</button>
     </form>
 </body>
