@@ -61,14 +61,7 @@ public class BoardController {
         return "board/modify"; 
     }
 
-    @PostMapping("/modify")
-    public String modify(BoardVO vo, HttpSession session) {
-    	if (session.getAttribute("user") == null) {
-            return "redirect:/board/login";
-        }   
-        service.update(vo);
-        return "redirect:/board/list"; 
-    }
+   
 
     @PostMapping("/remove")
     public String remove(@RequestParam("bno") int bno, HttpSession session) {
