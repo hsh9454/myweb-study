@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.mycom.myweb.BoardVO;
 import com.mycom.myweb.Criteria;
+import com.mycom.myweb.PageDTO;
 import com.mycom.myweb.UserVO;
 import com.mycom.myweb.mapper.UserMapper;
 import com.mycom.myweb.service.BoardService;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -31,13 +34,10 @@ public class BoardController {
     @GetMapping("/list")
     public void list(Criteria cri, Model model) {
         int total = service.getTotalCount();
-        int totalPages = (int) Math.ceil((double) total / cri.getAmount());
-        
-        model.addAttribute("totalPages", totalPages);
-        model.addAttribute("currentPage", cri.getPageNum());
+        PageDTO pageMaker = new PageDTO(cri, total);
+
         model.addAttribute("list", service.getListWithPaging(cri));
-        model.addAttribute("pageMaker", cri); 
-        model.addAttribute("total", total);
+        model.addAttribute("pageMaker", pageMaker);         
     }
     
     @GetMapping("/get")

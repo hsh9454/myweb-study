@@ -60,7 +60,7 @@
         </tr>
     
     <c:forEach items="${list}" var="board" varStatus="status">
-        <c:set var="currentNum" value="${total - ((pageMaker.pageNum - 1) * 10) - status.index}" />
+        <c:set var="currentNum" value="${pageMaker.total - ((pageMaker.cri.pageNum - 1) * 10) - status.index}" />
         <tr>
             <td>${currentNum}</td>
         
@@ -79,12 +79,20 @@
 
 
 <div class="pagination">
-    <c:forEach var="num" begin="1" end="${totalPages}">
+    <c:if test="${pageMaker.prev}">
+        <a href="/myweb/board/list?pageNum=${pageMaker.startPage - 1}"> [이전] </a>
+    </c:if>
+
+    <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
         <a href="/myweb/board/list?pageNum=${num}" 
-           style="${num == pageMaker.pageNum ? 'background-color: #ddd; font-weight: bold;' : ''}">
+           style="${num == pageMaker.cri.pageNum ? 'background-color: #ddd; font-weight: bold;' : ''}">
            ${num}
         </a>
     </c:forEach>
+
+    <c:if test="${pageMaker.next}">
+        <a href="/myweb/board/list?pageNum=${pageMaker.endPage + 1}"> [다음] </a>
+    </c:if>
 </div>
 
 </body>
