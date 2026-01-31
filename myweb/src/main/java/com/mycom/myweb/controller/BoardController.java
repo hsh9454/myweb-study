@@ -74,22 +74,24 @@ public class BoardController {
 
     @GetMapping("/register")
     public String register(HttpSession session, RedirectAttributes ra) {
-    	if (session.getAttribute("user") == null) {
-    		ra.addFlashAttribute("msg", "로그인 후 이용 가능한 서비스입니다.");
-    		return "redirect:/board/login";
-    	}
-    	return "board/register";
+        
+        if (session.getAttribute("user") == null) {
+            ra.addFlashAttribute("msg", "로그인 후 이용 가능한 서비스입니다.");
+            return "redirect:/board/login";
+        }
+      
+        return "board/register"; 
     }
 
     @PostMapping("/register")
     public String register(BoardVO vo, HttpSession session) {
-    	
-    	UserVO loginUser = (UserVO) session.getAttribute("user");
-    	if (loginUser != null) {
-    		vo.setWriter(loginUser.getUserid());
-    	}
-    	service.insert(vo);
-    	
+        
+        UserVO loginUser = (UserVO) session.getAttribute("user");       
+        
+        if (loginUser != null) {           
+            vo.setWriter(loginUser.getUsername());
+        }                
+        service.insert(vo);        
         return "redirect:/board/list"; 
     }
 
