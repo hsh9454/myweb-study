@@ -90,10 +90,13 @@ public class BoardController {
 
     @PostMapping("/register")
     public String register(BoardVO vo, HttpSession session) {
-    	if (session.getAttribute("user") == null) {
-    		return "redirect:/board/login";
+    	
+    	UserVO loginUser = (UserVO) session.getAttribute("user");
+    	if (loginUser != null) {
+    		vo.setWriter(loginUser.getUserid());
     	}
-        service.insert(vo);
+    	service.insert(vo);
+    	
         return "redirect:/board/list"; 
     }
 

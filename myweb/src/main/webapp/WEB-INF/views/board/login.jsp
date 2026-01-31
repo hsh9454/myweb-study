@@ -8,7 +8,7 @@
 <body>
     <h2>로그인 하세요</h2>
     <hr>
-=
+
     <form action="login" method="post">
         <div>
             아이디: <input type="text" name="userid" required>
