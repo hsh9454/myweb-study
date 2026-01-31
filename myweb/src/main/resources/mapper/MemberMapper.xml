@@ -13,10 +13,18 @@
         FROM TBL_USER 
         WHERE userid = #{userid} AND userpw = #{userpw}
     </select>
-
+      
     <select id="getName" resultType="string">
         SELECT USERNAME FROM MEMBER_TEST WHERE ROWNUM = 1
     </select>
+
+    <insert id="join">
+          INSERT INTO TBL_USER (userid, userpw, username)
+          VALUES (#{userid}, #{userpw}, #{username})
+    
+    
+    </insert>
+
 
     <insert id="insertTest">
         INSERT INTO test (id, name) VALUES (#{id}, #{name})

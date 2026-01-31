@@ -39,4 +39,10 @@ public class UserVO {
     public void setRegdate(Timestamp regdate) { 
         this.regdate = regdate; 
     }
+	@Override
+	public String toString() {
+		return "UserVO [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", regdate=" + regdate
+				+ "]";
+	}
+    
 }
