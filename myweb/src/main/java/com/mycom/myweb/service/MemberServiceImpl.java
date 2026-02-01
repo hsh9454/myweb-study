@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycom.myweb.mapper.MemberMapper;
-
+import com.mycom.myweb.UserVO;
 @Service
 public class MemberServiceImpl implements MemberService {
 	
@@ -29,6 +29,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void deleteTest(int id) {
 	    memberMapper.deleteTest(id);
+	}
+	
+	@Override
+	public void join(UserVO vo) {
+	    memberMapper.join(vo); 
 	}
 	
 }

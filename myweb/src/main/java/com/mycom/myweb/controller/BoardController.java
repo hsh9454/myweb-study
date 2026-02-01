@@ -19,7 +19,7 @@ import com.mycom.myweb.service.BoardService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
+import com.mycom.myweb.mapper.MemberMapper;
 @Controller
 @RequestMapping("/board")
 public class BoardController {

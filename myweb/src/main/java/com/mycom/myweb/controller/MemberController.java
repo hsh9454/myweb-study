@@ -31,6 +31,7 @@ public class MemberController {
 	@PostMapping("/join")
 	public String joinPOST(UserVO vo) {
 		System.out.println("가입 요청 데이터: " + vo);
+		memberService.join(vo);
 		return "redirect:/member/login";
 	}
 

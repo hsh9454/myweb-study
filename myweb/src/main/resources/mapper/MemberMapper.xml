@@ -5,26 +5,14 @@
  
 <mapper namespace="com.mycom.myweb.mapper.MemberMapper">
 
-    <select id="login" resultType="com.mycom.myweb.UserVO">
-        SELECT 
-            userid, 
-            userpw, 
-            username 
-        FROM TBL_USER 
-        WHERE userid = #{userid} AND userpw = #{userpw}
-    </select>
-      
-    <select id="getName" resultType="string">
-        SELECT USERNAME FROM MEMBER_TEST WHERE ROWNUM = 1
-    </select>
-
     <insert id="join">
           INSERT INTO TBL_USER (userid, userpw, username)
           VALUES (#{userid}, #{userpw}, #{username})
-    
-    
     </insert>
 
+    <select id="getName" resultType="string">
+        SELECT USERNAME FROM TBL_USER WHERE ROWNUM = 1
+    </select>
 
     <insert id="insertTest">
         INSERT INTO test (id, name) VALUES (#{id}, #{name})
