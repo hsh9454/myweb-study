@@ -7,7 +7,7 @@ import com.mycom.myweb.BoardVO;
 
 public interface BoardService {
 	
-	public int getTotalCount();
+	public int getTotalCount(Criteria cri);
 	public List<BoardVO> getListWithPaging(Criteria cri);
     public List<BoardVO> getList();
     public void insert(BoardVO vo); 
