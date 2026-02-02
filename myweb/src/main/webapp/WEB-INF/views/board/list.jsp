@@ -53,10 +53,10 @@
             <c:otherwise>
                 <strong>${sessionScope.user.username}님 환영합니다!</strong>
                 <a href="${pageContext.request.contextPath}/board/logout" style="margin-right: 10px;">로그아웃</a>
-                <button type="button" onclick="location.href='${pageContext.request.contextPath}/board/register'">
+                <button type="button" onclick="location.href='${pageContext.request.contextPath}/board/register?bgno=${pageMaker.cri.bgno}'">
                     새 글 등록
                 </button>
-            </c:otherwise>
+            </c:otherwise> 
         </c:choose>
     </div>
 

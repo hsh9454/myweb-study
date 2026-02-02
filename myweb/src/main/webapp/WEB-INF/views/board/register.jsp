@@ -5,6 +5,7 @@
 <body>
     <h2>새 게시글 작성</h2>
 <form action="/myweb/board/register" method="post">
+    <input type="hidden" name="bgno" value="${param.bgno}">
     <table border="1">
         <tr>
             <th>작성자</th>

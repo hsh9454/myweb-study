@@ -9,15 +9,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.mycom.myweb.BoardVO;
 import com.mycom.myweb.Criteria;
 import com.mycom.myweb.PageDTO;
 import com.mycom.myweb.UserVO;
+import com.mycom.myweb.mapper.MenuMapper;
 import com.mycom.myweb.mapper.UserMapper;
 import com.mycom.myweb.service.BoardService;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import com.mycom.myweb.mapper.MenuMapper;
 
 
 @Controller
@@ -73,7 +75,7 @@ public class BoardController {
 	}
 
 	@PostMapping("/register")
-	public String register(BoardVO vo, HttpSession session) {
+	public String register(BoardVO vo, HttpSession session, RedirectAttributes rttr) {
 
 		UserVO loginUser = (UserVO) session.getAttribute("user");
 
@@ -81,6 +83,7 @@ public class BoardController {
 			vo.setWriter(loginUser.getUsername());
 		}
 		service.insert(vo);
+		rttr.addAttribute("bgno", vo.getBgno());
 		return "redirect:/board/list";
 	}
 
