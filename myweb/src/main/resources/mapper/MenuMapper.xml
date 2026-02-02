@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mycom.myweb.mapper.MenuMapper">
+
+    <select id="selectMenuList" resultType="com.mycom.myweb.MenuVO">
+        SELECT 
+            MENU_ID    as menuId,
+            MENU_NAME  as menuName,
+            PARENT_ID  as parentId,
+            DEPTH      as depth,
+            BGNO       as bgno,
+            MENU_ORDER as menuOrder
+        FROM MENU
+        ORDER BY DEPTH ASC, MENU_ORDER ASC
+    </select>
+
+</mapper>

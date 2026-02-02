@@ -9,9 +9,15 @@ public class BoardVO {
     private String writer;
     private Timestamp regdate;    
     private Timestamp updatedate; 
-
+    private int bgno;
   
-    public int getBno() { return bno; }
+    public int getBgno() {
+		return bgno;
+	}
+	public void setBgno(int bgno) {
+		this.bgno = bgno;
+	}
+	public int getBno() { return bno; }
     public void setBno(int bno) { this.bno = bno; }
 
     public String getTitle() { return title; }

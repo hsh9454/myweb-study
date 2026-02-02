@@ -17,6 +17,8 @@ import com.mycom.myweb.mapper.UserMapper;
 import com.mycom.myweb.service.BoardService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import com.mycom.myweb.mapper.MenuMapper;
+
 
 @Controller
 @RequestMapping("/board")
@@ -28,12 +30,16 @@ public class BoardController {
 
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Autowired
+    private MenuMapper menuMapper;
 
 	@GetMapping("/list")
-	public void list(Criteria cri, Model model) {
+	public void list(Criteria cri, Model model, @RequestParam(value="bgno", defaultValue="1") int bgno) {
+		cri.setBgno(bgno);
+		model.addAttribute("menuList", menuMapper.selectMenuList());
 		int total = service.getTotalCount(cri);
-		PageDTO pageMaker = new PageDTO(cri, total);
-
+		PageDTO pageMaker = new PageDTO(cri, total);       
 		model.addAttribute("list", service.getListWithPaging(cri));
 		model.addAttribute("pageMaker", pageMaker);
 	}

@@ -5,6 +5,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<nav>
+    <ul style="display: flex; list-style: none; gap: 20px; background: #f4f4f4; padding: 10px;">
+        <c:forEach items="${menuList}" var="menu">
+            <c:if test="${menu.depth == 1}">
+                <li style="position: relative; font-weight: bold;">
+                    ${menu.menuName}
+                    
+                    <ul style="font-weight: normal; padding-left: 10px;">
+                        <c:forEach items="${menuList}" var="subMenu">
+                            <c:if test="${subMenu.parentId == menu.menuId}">
+                                <li>
+                                    <a href="/myweb/board/list?bgno=${subMenu.bgno}">
+                                        ${subMenu.menuName}
+                                    </a>
+                                </li>
+                            </c:if>
+                        </c:forEach>
+                    </ul>
+                </li>
+            </c:if>
+        </c:forEach>
+    </ul>
+</nav>
+<hr>
+
+
     <title>130개 데이터 게시판</title>
     <style>
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }

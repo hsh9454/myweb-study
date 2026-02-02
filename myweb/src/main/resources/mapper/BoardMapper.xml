@@ -29,22 +29,22 @@
   <select id="getTotalCount" resultType="int">
     SELECT COUNT(*) FROM board 
     WHERE 
-    <include refid="criteria"></include> bno > 0
+    bgno = #{bgno} AND <include refid="criteria"></include>
+    bno > 0
 </select>
   
 
 <select id="getListWithPaging" resultType="com.mycom.myweb.BoardVO">
 <![CDATA[
-  SELECT bno, title, content, writer, regdate, updatedate
+  SELECT bno, title, content, writer, regdate, updatedate, bgno
   FROM (
       SELECT /*+INDEX_DESC(board pk_board) */ 
-             rownum rn, bno, title, content, writer, regdate, updatedate
+             rownum rn, bno, title, content, writer, regdate, updatedate, bgno  -- 안쪽에도 bgno를 넣어줘야 밖에서 쓸 수 있어요!
       FROM board
       WHERE 
+      bgno = #{bgno} AND 
 ]]>
-      
       <include refid="criteria"></include>
-      
 <![CDATA[
       rownum <= #{pageNum} * #{amount}
   )
@@ -57,9 +57,7 @@
   </select>
 
   <insert id="insert" parameterType="com.mycom.myweb.BoardVO">
-    INSERT INTO board (bno, title, content, writer)
-    VALUES (board_seq.nextval, #{title}, #{content}, #{writer})
-</insert>
+    INSERT INTO board (bno, title, content, writer, bgno) VALUES (board_seq.nextval, #{title}, #{content}, #{writer}, #{bgno}) </insert>
 
   <update id="update">
      UPDATE board SET title = #{title}, content = #{content}, updatedate = sysdate

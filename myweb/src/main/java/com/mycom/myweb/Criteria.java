@@ -5,8 +5,17 @@ public class Criteria {
     private int amount;
     private String type;    
     private String keyword; 
+    private int bgno;
+       
+    public int getBgno() {
+		return bgno;
+	}
 
-    public Criteria() {
+	public void setBgno(int bgno) {
+		this.bgno = bgno;
+	}
+
+	public Criteria() {
         this(1, 10);
     }
 
