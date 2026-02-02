@@ -38,15 +38,20 @@
 <![CDATA[
   SELECT bno, title, content, writer, regdate, updatedate, bgno
   FROM (
-      SELECT /*+INDEX_DESC(board pk_board) */ 
-             rownum rn, bno, title, content, writer, regdate, updatedate, bgno  -- 안쪽에도 bgno를 넣어줘야 밖에서 쓸 수 있어요!
-      FROM board
-      WHERE 
-      bgno = #{bgno} AND 
+      SELECT 
+             rownum rn, bno, title, content, writer, regdate, updatedate, bgno
+      FROM (
+          SELECT /*+INDEX_DESC(board pk_board) */ 
+                 bno, title, content, writer, regdate, updatedate, bgno
+          FROM board
+          WHERE bgno = #{bgno} AND 
 ]]>
-      <include refid="criteria"></include>
+          <include refid="criteria"></include>
 <![CDATA[
-      rownum <= #{pageNum} * #{amount}
+          bno > 0
+          ORDER BY bno DESC
+      ) 
+      WHERE rownum <= #{pageNum} * #{amount}
   )
   WHERE rn > (#{pageNum} - 1) * #{amount}
 ]]>
@@ -69,7 +74,15 @@
   </delete>
 
   <select id="getList" resultType="com.mycom.myweb.BoardVO">
-      SELECT * FROM board WHERE bno > 0 ORDER BY bno DESC
+      SELECT * FROM (
+          SELECT
+              ROWNUM AS RN, A.* FROM (
+              SELECT * FROM BOARD
+              WHERE BGNO = #{bgno}
+              ORDER BY BNO DESC
+          ) A
+    )          
+    WHERE RN BETWEEN 1 AND 10
   </select>
 
 </mapper>

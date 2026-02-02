@@ -96,7 +96,7 @@
             <c:forEach items="${list}" var="board" varStatus="status">
                 
                 <tr>
-                    <td>${status.count}</td>
+                    <td>${board.bno}</td>
                     <td>
                         <a href="/myweb/board/get?bno=${board.bno}&num=${status.count}">
                             ${board.title}
