@@ -9,16 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.mycom.myweb.BoardVO;
 import com.mycom.myweb.Criteria;
 import com.mycom.myweb.PageDTO;
 import com.mycom.myweb.UserVO;
 import com.mycom.myweb.mapper.UserMapper;
 import com.mycom.myweb.service.BoardService;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/board")
 public class BoardController {
@@ -50,32 +49,20 @@ public class BoardController {
 	public String modify(@RequestParam("bno") int bno,
 			@RequestParam(value = "num", required = false, defaultValue = "0") int num, HttpSession session,
 			RedirectAttributes ra, Model model) {
-		if (session.getAttribute("user") == null) {
-			ra.addFlashAttribute("msg", "수정 권한이 없습니다. 로그인해주세요.");
-			return "redirect:/board/login";
-		}
+		
 		model.addAttribute("board", service.get(bno));
 		model.addAttribute("vNum", num);
 		return "board/modify";
 	}
 
 	@PostMapping("/remove")
-	public String remove(@RequestParam("bno") int bno, HttpSession session) {
-		if (session.getAttribute("user") == null) {
-			return "redirect:/board/login";
-		}
+	public String remove(@RequestParam("bno") int bno, HttpSession session) {	
 		service.delete(bno);
 		return "redirect:/board/list";
 	}
 
 	@GetMapping("/register")
-	public String register(HttpSession session, RedirectAttributes ra) {
-
-		if (session.getAttribute("user") == null) {
-			ra.addFlashAttribute("msg", "로그인 후 이용 가능한 서비스입니다.");
-			return "redirect:/board/login";
-		}
-
+	public String register() {
 		return "board/register";
 	}
 

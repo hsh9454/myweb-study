@@ -16,4 +16,20 @@
 	
 	<context:component-scan base-package="com.mycom.myweb" />
 	
+	<interceptors>
+	    <interceptor>
+	        <mapping path="/board/register"/>
+	        <mapping path="/board/modify"/>
+	        <mapping path="/board/remove"/>
+	    
+	        <beans:bean class="com.mycom.myweb.LoginInterceptor"/>	        	  
+	    </interceptor>
+	</interceptors>
+	
+	
+	
+	
+	
+	
+	
 </beans:beans>
