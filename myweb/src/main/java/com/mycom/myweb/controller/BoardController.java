@@ -97,7 +97,7 @@ public class BoardController {
 		if (loginUser != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", loginUser);
-			return "redirect:/board/list";
+			return "redirect:/board/list?bgno=2";
 		} else {
 			return "redirect:/board/login";
 		}

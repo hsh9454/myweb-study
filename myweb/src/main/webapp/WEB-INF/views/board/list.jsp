@@ -16,11 +16,13 @@
                     <ul style="font-weight: normal; padding-left: 10px;">
                         <c:forEach items="${menuList}" var="subMenu">
                             <c:if test="${subMenu.parentId == menu.menuId}">
-                                <li>
-                                    <a href="/myweb/board/list?bgno=${subMenu.bgno}">
-                                        ${subMenu.menuName}
-                                    </a>
-                                </li>
+                                
+                               <li>
+                                   <a href="/myweb/board/list?bgno=${subMenu.bgno}&pageNum=1">
+                                   ${subMenu.menuName}
+                                   </a>
+                               </li> 
+                                
                             </c:if>
                         </c:forEach>
                     </ul>
@@ -111,7 +113,7 @@
 
     <div class="pagination">
     <c:if test="${pageMaker.prev}">
-        <a href="/myweb/board/list?pageNum=${pageMaker.startPage - 1}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}"> [이전] </a>
+        <a href="/myweb/board/list?pageNum=${pageMaker.startPage - 1}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}&bgno=${param.bgno}"> [이전] </a>
     </c:if>
 
     <c:choose>
@@ -119,17 +121,19 @@
             <a href="#" style="background-color: #ddd; font-weight: bold;">1</a>
         </c:when>
         <c:otherwise>
+        
             <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-                <a href="/myweb/board/list?pageNum=${num}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}" 
-                   style="${num == pageMaker.cri.pageNum ? 'background-color: #ddd; font-weight: bold;' : ''}">
-                   ${num}
+                <a href="/myweb/board/list?pageNum=${num}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}&bgno=${param.bgno}" 
+                style="${num == pageMaker.cri.pageNum ? 'background-color: #ddd; font-weight: bold;' : ''}">
+                ${num}
                 </a>
             </c:forEach>
+            
         </c:otherwise>
     </c:choose>
 
     <c:if test="${pageMaker.next}">
-        <a href="/myweb/board/list?pageNum=${pageMaker.endPage + 1}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}"> [다음] </a>
+        <a href="/myweb/board/list?pageNum=${pageMaker.endPage + 1}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}&bgno=${param.bgno}"> [다음] </a>
     </c:if>
 </div>
 
