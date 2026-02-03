@@ -74,7 +74,9 @@
                 <option value="TWC" ${pageMaker.cri.type eq 'TWC'?'selected':''}>제목 or 내용 or 작성자</option>
             </select>
             <input type='text' name='keyword' value='${pageMaker.cri.keyword}' style="height: 30px;" />
-            <input type='hidden' name='pageNum' value='1' /> <input type='hidden' name='amount' value='${pageMaker.cri.amount}' />
+            <input type='hidden' name='bgno' value='${pageMaker.cri.bgno}' /> 
+            <input type='hidden' name='pageNum' value='1' /> 
+            <input type='hidden' name='amount' value='${pageMaker.cri.amount}' />
             <button class='btn btn-default' style="border: 1px solid #ccc; cursor:pointer;">검색</button>
         </form>
     </div>
