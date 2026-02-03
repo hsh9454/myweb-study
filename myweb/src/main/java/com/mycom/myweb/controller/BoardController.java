@@ -64,17 +64,22 @@ public class BoardController {
 	}
 
 	@PostMapping("/remove")
-	public String remove(@RequestParam("bno") int bno, @RequestParam("bgno") int bgno, String writer, HttpSession session) {	
-		UserVO loginUser = (UserVO) session.getAttribute("user");
-		
-		if (loginUser == null || !loginUser.getUsername().equals(writer)) {
+	public String remove(
+	        @RequestParam("bno") int bno, 
+	        @RequestParam(value="bgno", required=false, defaultValue="2") int bgno, 
+	        @RequestParam("writer") String writer, 
+	        HttpSession session) {	
+	    
+	    UserVO loginUser = (UserVO) session.getAttribute("user");
+
+	    if (loginUser == null || !loginUser.getUsername().equals(writer)) {
 	        return "redirect:/board/list?bgno=" + bgno;
 	    }
-	
-		service.delete(bno);
-		return "redirect:/board/list";
+	    service.delete(bno);
+	    return "redirect:/board/list?bgno=" + bgno;
 	}
-
+	
+	
 	@GetMapping("/register")
 	public String register() {
 		return "board/register";
