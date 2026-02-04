@@ -9,6 +9,9 @@
 
 	<annotation-driven />
 
+	<resources mapping="/resources/**" location="/resources/" />
+    <resources mapping="/js/**" location="/js/" />
+    
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
@@ -21,15 +24,8 @@
 	        <mapping path="/board/register"/>
 	        <mapping path="/board/modify"/>
 	        <mapping path="/board/remove"/>
-	    
 	        <beans:bean class="com.mycom.myweb.LoginInterceptor"/>	        	  
 	    </interceptor>
 	</interceptors>
-	
-	
-	
-	
-	
-	
 	
 </beans:beans>

@@ -28,10 +28,10 @@
 
   <select id="getTotalCount" resultType="int">
     SELECT COUNT(*) FROM board 
-    WHERE 
-    bgno = #{bgno} AND <include refid="criteria"></include>
+    WHERE bgno = #{bgno} AND
+    <include refid="criteria"></include>
     bno > 0
-</select>
+  </select>
   
 
 <select id="getListWithPaging" resultType="com.mycom.myweb.BoardVO">
