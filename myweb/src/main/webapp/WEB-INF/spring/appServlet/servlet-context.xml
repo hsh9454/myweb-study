@@ -10,7 +10,6 @@
 	<annotation-driven />
 
 	<resources mapping="/resources/**" location="/resources/" />
-    <resources mapping="/js/**" location="/js/" />
     
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -28,4 +27,7 @@
 	    </interceptor>
 	</interceptors>
 	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+    </beans:bean>
+
 </beans:beans>

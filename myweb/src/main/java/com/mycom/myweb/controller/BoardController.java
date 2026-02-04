@@ -21,6 +21,14 @@ import com.mycom.myweb.service.BoardService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.UUID;
+import jakarta.servlet.http.HttpServletResponse;
+
 
 @Controller
 @RequestMapping("/board")
@@ -98,6 +106,10 @@ public class BoardController {
 		return "redirect:/board/list?bgno=" + vo.getBgno();
 	}
 
+	
+	
+	
+	
 	@GetMapping("/login")
 	public void login() {
 	}
@@ -119,4 +131,51 @@ public class BoardController {
 		session.invalidate();
 		return "redirect:/board/list?bgno=2";
 	}
+	
+
+	@PostMapping("/uploadPhoto")
+    public void uploadPhoto(HttpServletRequest request, HttpServletResponse response) {
+        try {
+        
+            String fileName = request.getHeader("file-name");
+            String fileDirectory = request.getServletContext().getRealPath("/resources/upload");
+            
+            File dir = new File(fileDirectory);
+            if (!dir.exists()) dir.mkdirs();
+          
+            File file = new File(fileDirectory, fileName);
+            
+            InputStream is = request.getInputStream();
+            OutputStream os = new FileOutputStream(file);
+            
+            int numRead;
+            byte[] b = new byte[Integer.parseInt(request.getHeader("file-size"))];
+            while ((numRead = is.read(b, 0, b.length)) != -1) {
+                os.write(b, 0, numRead);
+            }
+            
+            if (is != null) is.close();
+            os.flush();
+            os.close();
+
+            String fileURL = request.getContextPath() + "/resources/upload/" + fileName;
+            
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.print("bNewLine=true&sFileName=" + fileName + "&sFileURL=" + fileURL);
+            out.flush();
+            out.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+	
+	
 }
+
+
+
+
+
+
