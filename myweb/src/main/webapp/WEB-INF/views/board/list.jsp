@@ -42,6 +42,7 @@
         .pagination a { padding: 8px 16px; text-decoration: none; border: 1px solid #ddd; color: black; }
         .search-area { margin-bottom: 20px; margin-top: 20px; }
     </style>
+    
 </head>
 <body>
 

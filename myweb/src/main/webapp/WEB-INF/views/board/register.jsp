@@ -4,6 +4,11 @@
 <head>
     <title>새 글 쓰기</title>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+            <style>
+            .se2_version_info { 
+                display: none !important; 
+                }
+            </style>
 </head>
 
 <body>
@@ -51,41 +56,39 @@
         },
         
         fOnAppLoad : function(){
-      
             try {
                 var iframe = document.getElementById('content' + "_iframe");
                 if(!iframe) iframe = document.querySelector('iframe');
-                
                 var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-              
+
+                var style = iframeDoc.createElement('style');
+                style.innerHTML = '.se2_version_info { display: none !important; }';
+                iframeDoc.head.appendChild(style);
+
                 var toolbar = iframeDoc.querySelector('.se2_multy'); 
-                
                 if(toolbar) {
                     var li = iframeDoc.createElement('li');
                     li.innerHTML = '<button type="button" style="background:#ffcc00; color:#333; border:1px solid #999; padding:2px 5px; cursor:pointer; font-size:12px; font-weight:bold; margin-left:5px; height:22px; vertical-align:middle;">사진</button>';
                     li.onclick = function() {
-                
                         var sUrl = "${pageContext.request.contextPath}/resources/js/smarteditor/sample/photo_uploader/photo_uploader.html";
                         window.open(sUrl, "photo_popup", "width=403,height=359,scrollbars=yes,resizable=no");
                     };
                     toolbar.appendChild(li);
                 }
             } catch(e) {
-                console.log("버튼 생성 중 오류 발생:", e);
+                console.log("커스텀 중 오류 발생:", e);
             }
         }
-    });
+    }); 
 
- 
     function save() {
-   
         oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-        
         var form = document.getElementById("registerForm");
         if(form) {
             form.submit();
         }
     }
     </script>
+    
 </body>
 </html>
