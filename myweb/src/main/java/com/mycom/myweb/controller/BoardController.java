@@ -56,9 +56,13 @@ public class BoardController {
 
 	@GetMapping("/get")
 	public void get(@RequestParam("bno") int bno,
-			@RequestParam(value = "num", required = false, defaultValue = "0") int num, Model model) {
+			        @RequestParam(value = "bgno", required = false, defaultValue = "1") int bgno,
+		         	@RequestParam(value = "num", required = false, defaultValue = "0") int num, Criteria cri, Model model) {
+		
 		model.addAttribute("board", service.get(bno));
 		model.addAttribute("vNum", num);
+		model.addAttribute("cri", cri);
+		model.addAttribute("bgno", bgno);
 	}
 
 	@GetMapping("/modify")

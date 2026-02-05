@@ -50,7 +50,7 @@
     </table>
 
 <div class="btn-group">
-        <button onclick="location.href='/myweb/board/list?bgno=${param.bgno}'">목록으로</button>
+        <button onclick="location.href='/myweb/board/list?bgno=${bgno}&pageNum=${cri.pageNum}&amount=${cri.amount}'">목록으로</button>
     
     <c:if test="${sessionScope.user.username == board.writer}">
         <button onclick="location.href='/myweb/board/modify?bno=${board.bno}&num=${vNum}&bgno=${param.bgno}'">수정/삭제하기</button>

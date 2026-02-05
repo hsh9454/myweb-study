@@ -93,7 +93,7 @@
         <tbody>
             <tr style="background-color: #fff9e6;">
                 <td>🥶</td>
-                <td><strong><a href="/myweb/board/get?bno=1">[공지] 감기 조심하세요 !! </a></strong></td>
+                <td><strong><a href="/myweb/board/get?bno=1&bgno=${pageMaker.cri.bgno}">[공지] 감기 조심하세요 !! </a></strong></td>
                 <td>관리자</td>
                 <td>2026-01-28</td>
             </tr>
@@ -102,8 +102,8 @@
                 <tr>
                     <td>${board.bno}</td>
                     <td>
-                        <a href="/myweb/board/get?bno=${board.bno}&num=${status.count}">
-                            ${board.title}
+                        <a href="/myweb/board/get?bno=${board.bno}&num=${status.count}&bgno=${pageMaker.cri.bgno}">
+                             ${board.title}
                         </a>
                     </td>
                     <td>${board.writer}</td>
@@ -117,6 +117,9 @@
     <c:if test="${pageMaker.prev}">
         <a href="/myweb/board/list?pageNum=${pageMaker.startPage - 1}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}&bgno=${param.bgno}"> [이전] </a>
     </c:if>
+    
+    
+    
 
     <c:choose>
         <c:when test="${pageMaker.total == 0}">
